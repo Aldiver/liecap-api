@@ -16,7 +16,10 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::where('plate_number', $plateNumber)->first();
         if ($vehicle) {
-            return response()->json($vehicle);
+            return response()->json([
+            'vehicleInfo' => $vehicle,
+            'message' => 'All vehicles retrieved successfully'
+            ]);
         } else {
             return response()->json(['error' => 'Vehicle not found'], 404);
         }
