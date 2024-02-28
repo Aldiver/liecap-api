@@ -9,6 +9,6 @@ class EntryRecordController extends Controller
 {
     public function getAllEntries()
     {
-        return EntryRecord::all();
+        return EntryRecord::latest()->get();
     }
 }

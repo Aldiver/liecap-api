@@ -22,6 +22,9 @@ Route::post('/auth/login', [UserController::class, 'loginUser']);
 // Vehicle Endpoints
 Route::get('/vehicles', [VehicleController::class, 'getAllVehicles']);
 Route::get('/vehicles/{plateNumber}', [VehicleController::class, 'getVehicle']);
+Route::post('vehicles/entry-record', [VehicleController::class, 'insertGuestEntryRecord']);
+Route::post('vehicles/entry-record-valid', [VehicleController::class, 'insertEntryRecordValid']);
+
 
 // Entry Record Endpoints
 Route::get('/entry-records', [EntryRecordController::class, 'getAllEntries']);
