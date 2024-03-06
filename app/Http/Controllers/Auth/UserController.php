@@ -11,16 +11,19 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function createUser(Request $request){
+    public function createUser(Request $request)
+    {
         try {
-            $validateUser = Validator::make($request->all(), 
-            [
+            $validateUser = Validator::make(
+                $request->all(),
+                [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required'
-            ]);
+            ]
+            );
 
-            if($validateUser->fails()){
+            if($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -48,15 +51,18 @@ class UserController extends Controller
         }
     }
 
-    public function loginUser(Request $request){
+    public function loginUser(Request $request)
+    {
         try {
-            $validateUser = Validator::make($request->all(), 
-            [
+            $validateUser = Validator::make(
+                $request->all(),
+                [
                 'email' => 'required|email',
                 'password' => 'required'
-            ]);
+            ]
+            );
 
-            if($validateUser->fails()){
+            if($validateUser->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
@@ -64,7 +70,7 @@ class UserController extends Controller
                 ], 401);
             }
 
-            if(!Auth::attempt($request->only(['email', 'password']))){
+            if(!Auth::attempt($request->only(['email', 'password']))) {
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
@@ -83,5 +89,17 @@ class UserController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+    }
+
+    public function getUserInfo(Request $request)
+    {
+        // Get the authenticated user
+        $user = $request->user();
+
+        // Return user information
+        return response()->json([
+            'user_info' => $user,
+            'message' => 'User information retrieved successfully',
+        ]);
     }
 }

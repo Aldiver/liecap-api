@@ -91,4 +91,17 @@ class VehicleController extends Controller
         // Return a success response
         return response()->json(['message' => 'Entry record created successfully'], 200);
     }
+
+    public function getTotalVehicles()
+    {
+        $totalValidVehicles = Vehicle::where('validity', 'Registered')->count();
+        $totalExpiredVehicles = Vehicle::where('validity', 'Expired')->count();
+        $totalGuestVehicles = Vehicle::where('validity', 'Guest')->count();
+
+        return response()->json([
+            'total_valid_vehicles' => $totalValidVehicles,
+            'total_expired_vehicles' => $totalExpiredVehicles,
+            'total_guest_vehicles' => $totalGuestVehicles,
+        ]);
+    }
 }

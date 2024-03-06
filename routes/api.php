@@ -18,6 +18,7 @@ use App\Http\Controllers\EntryRecordController;
 */
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
+Route::get('user/info', [UserController::class, 'getUserInfo']);
 
 // Vehicle Endpoints
 Route::get('/vehicles', [VehicleController::class, 'getAllVehicles']);
@@ -28,3 +29,6 @@ Route::post('vehicles/entry-record-valid', [VehicleController::class, 'insertEnt
 
 // Entry Record Endpoints
 Route::get('/entry-records', [EntryRecordController::class, 'getAllEntries']);
+
+Route::get('/summary/vehicles', [VehicleController::class, 'getTotalVehicles']); // Get total vehicles summary
+Route::get('/summary/entry-records', [EntryRecordController::class, 'getTotalEntryRecords']); // Get total entry records summary
