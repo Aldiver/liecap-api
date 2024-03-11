@@ -16,6 +16,7 @@ class EntryRecordFactory extends Factory
         $plateNumber = strtoupper($this->faker->randomLetter() . $this->faker->randomLetter() . $this->faker->randomLetter() . $this->faker->randomDigit() . $this->faker->randomDigit() . $this->faker->randomDigit());
 
         return [
+            'owner' => $this->faker->name,
             'timestamp' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
             'vehicle_plate_number' => $plateNumber,
             'date' => $this->faker->date(),

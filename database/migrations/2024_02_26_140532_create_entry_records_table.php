@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('entry_records', function (Blueprint $table) {
             $table->id();
+            $table->string('owner');
             $table->timestamp('timestamp');
             $table->string('vehicle_plate_number');
             $table->date('date');

@@ -49,6 +49,7 @@ class VehicleController extends Controller
 
             // Create an entry record based on the plate number
             $entryRecord = new EntryRecord();
+            $entryRecord->owner = $validatedData['owner'];
             $entryRecord->vehicle_plate_number = $validatedData['plate_number'];
             $entryRecord->timestamp = now()->toDateTimeString();
             $entryRecord->date = now()->toDateString();
@@ -81,7 +82,8 @@ class VehicleController extends Controller
 
         // Create a new entry record based on the plate number
         $entryRecord = new EntryRecord();
-        $entryRecord->vehicle_plate_number = $validatedData['plateNumber'];
+        $entryRecord->owner = $vehicle->owner;
+        $entryRecord->vehicle_plate_number = $validatedData->plate_number;
         $entryRecord->timestamp = now()->toDateTimeString();
         $entryRecord->date = now()->toDateString();
         // Set other properties of the entry record as needed

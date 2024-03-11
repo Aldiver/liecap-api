@@ -10,6 +10,6 @@ class EntryRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'timestamp', 'vehicle_plate_number', 'date'
+        'owner', 'timestamp', 'vehicle_plate_number', 'date'
     ];
 }
