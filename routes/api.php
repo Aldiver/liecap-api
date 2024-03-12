@@ -18,7 +18,7 @@ use App\Http\Controllers\EntryRecordController;
 */
 Route::post('/auth/register', [UserController::class, 'createUser']);
 Route::post('/auth/login', [UserController::class, 'loginUser']);
-Route::get('user/info', [UserController::class, 'getUserInfo']);
+Route::middleware('auth:sanctum')->get('/user/info', [UserController::class, 'getUserInfo']);
 
 // Vehicle Endpoints
 Route::get('/vehicles', [VehicleController::class, 'getAllVehicles']);
