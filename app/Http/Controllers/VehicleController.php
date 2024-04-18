@@ -16,7 +16,6 @@ class VehicleController extends Controller
     public function getVehicle($plateNumber)
     {
         $vehicle = Vehicle::where('plate_number', $plateNumber)
-                          ->where('validity', '!=', 'Guest')
                           ->first();
         if ($vehicle) {
             return response()->json([
@@ -43,8 +42,13 @@ class VehicleController extends Controller
             $vehicle = Vehicle::where('plate_number', $validatedData['plate_number'])->first();
 
             if (!$vehicle) {
-                // Create a new Vehicle instance
-                $vehicle = Vehicle::create($validatedData);
+                $vehicle = new Vehicle();
+                $vehicle->owner = $validatedData['owner'];
+                $vehicle->plate_number = $validatedData['plate_number'];
+                $vehicle->validity = $validatedData['validity'];
+                $vehicle->type = $validatedData['type'];
+                $vehicle->validity_date = now()->toDateString(); // Set the validity_date to the current date
+                $vehicle->save();
             }
 
             // Create an entry record based on the plate number
@@ -83,7 +87,7 @@ class VehicleController extends Controller
         // Create a new entry record based on the plate number
         $entryRecord = new EntryRecord();
         $entryRecord->owner = $vehicle->owner;
-        $entryRecord->vehicle_plate_number = $validatedData->plate_number;
+        $entryRecord->vehicle_plate_number = $validatedData['plateNumber'];
         $entryRecord->timestamp = now()->toDateTimeString();
         $entryRecord->date = now()->toDateString();
         // Set other properties of the entry record as needed
